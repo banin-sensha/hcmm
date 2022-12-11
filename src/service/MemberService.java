@@ -2,6 +2,8 @@ package service;
 
 import beans.Member;
 import cache.CacheManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,13 +29,13 @@ public class MemberService {
             while ((line = reader.readLine()) != null) {
                 String[] lineArr = line.split(";");
                 instruction = lineArr[0];
-                name = lineArr[1];
-                birthday = lineArr[2];
-                pass = lineArr[3];
-                mobile = Integer.parseInt(lineArr[4]);
-                fee = lineArr[5];
 
                 if (instruction.equals("add")) {
+                    name = lineArr[1];
+                    birthday = lineArr[2];
+                    pass = lineArr[3];
+                    mobile = Integer.parseInt(lineArr[4]);
+                    fee = lineArr[5];
                     addMember(name, birthday, pass, mobile, fee);
                 }
 
@@ -51,10 +53,10 @@ public class MemberService {
     public void addMember(String name, String birthday, String pass, int mobile, String fee) {
         Member member = new Member(name, birthday, pass, mobile, fee);
         if(checkIfMemberExist(member)) {
-            addingMember(member);
+            updatingMember(member);
         }
         else {
-            updatingMember(member);
+            addingMember(member);
         }
     }
 
@@ -91,6 +93,10 @@ public class MemberService {
 
     public void writeToMembersFile() {
         ArrayList<Member> memberList = CacheManager.getInstance().getMemberList();
-        
+        try {
+            new ObjectMapper().writeValue(new File("./resources/jpt.json"), memberList);
+        } catch (IOException e) {
+            System.out.println("Exception while writing to a file" + e);
+        }
     }
 }

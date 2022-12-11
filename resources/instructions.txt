@@ -1,1 +1,3 @@
-add;James Bloggs;20/12/1978;Gold;1234567890;$60
+add;James Bloggs;20/12/1980;Gold;1234567890;$60
+add;Santoo Shrestha;20/12/2005;Gold;1234567809;$60
+save;
