@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98e4c0a6-c5ce-4d4c-977f-c54d72793f38" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jackson_annotations_2_14_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jackson_core_2_14_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/jpt.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hcmm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hcmm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/instructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/instructions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/jpt.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/output.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MemberService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

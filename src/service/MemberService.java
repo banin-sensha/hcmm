@@ -94,7 +94,7 @@ public class MemberService {
     public void writeToMembersFile() {
         ArrayList<Member> memberList = CacheManager.getInstance().getMemberList();
         try {
-            new ObjectMapper().writeValue(new File("./resources/jpt.json"), memberList);
+            new ObjectMapper().writeValue(new File("./resources/output.json"), memberList);
         } catch (IOException e) {
             System.out.println("Exception while writing to a file" + e);
         }
