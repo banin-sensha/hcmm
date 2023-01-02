@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="98e4c0a6-c5ce-4d4c-977f-c54d72793f38" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/instructions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/instructions.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/members.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/members.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/output.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beans/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/beans/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cache/CacheManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cache/CacheManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MemberService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +63,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1670731688971</updated>
-      <workItem from="1672636056768" duration="5709000" />
+      <workItem from="1672636056768" duration="8576000" />
     </task>
     <servers />
   </component>
@@ -74,5 +80,21 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/service/MemberService.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/service/MemberService.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -7,11 +7,11 @@ public class Member {
 
     private String pass;
 
-    private int mobile;
+    private String mobile;
 
     private String fee;
 
-    public Member(String name, String birthday, String pass, int mobile, String fee) {
+    public Member(String name, String birthday, String pass, String mobile, String fee) {
         this.name = name;
         this.birthday = birthday;
         this.pass = pass;
@@ -43,11 +43,11 @@ public class Member {
         this.pass = pass;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 

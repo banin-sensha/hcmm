@@ -21,6 +21,10 @@ public class CacheManager {
 
     private ArrayList<Member> memberList = new ArrayList<>();
 
+    public void setMemberList(ArrayList<Member> memberList) {
+        this.memberList = memberList;
+    }
+
     public void createMemberCache() {
         JsonObject jsonObject = readMembersFile();
         Type memberType = new TypeToken<ArrayList<Member>>() {}.getType();

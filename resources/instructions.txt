@@ -2,3 +2,5 @@ add;James Bloggs;20/12/1980;Silver;1234567890;$60
 add;Santoo Shrestha;20/12/2005;Silver;1234567809;$60
 save;
 query pass Silver
+delete;Banin Shrestha;9841201124
+save;
