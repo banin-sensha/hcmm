@@ -1,0 +1,2 @@
+--query pass Silver--
+Total membership fees = $170.0

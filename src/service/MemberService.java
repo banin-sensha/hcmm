@@ -7,7 +7,9 @@ import com.google.gson.Gson;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MemberService {
 
@@ -21,33 +23,82 @@ public class MemberService {
         String pass = "";
         int mobile = 0;
         String fee = "";
+        String[] lineArr;
+        String key = "";
+        String value = "";
 
 
         try {
             reader = new BufferedReader(new FileReader(file));
 
             while ((line = reader.readLine()) != null) {
-                String[] lineArr = line.split(";");
-                instruction = lineArr[0];
+                if (line.contains(";")) {
+                    lineArr = line.split(";");
+                    instruction = lineArr[0];
 
-                if (instruction.equals("add")) {
-                    name = lineArr[1];
-                    birthday = lineArr[2];
-                    pass = lineArr[3];
-                    mobile = Integer.parseInt(lineArr[4]);
-                    fee = lineArr[5];
-                    addMember(name, birthday, pass, mobile, fee);
+                    if (instruction.equals("add")) {
+                        name = lineArr[1];
+                        birthday = lineArr[2];
+                        pass = lineArr[3];
+                        mobile = Integer.parseInt(lineArr[4]);
+                        fee = lineArr[5];
+                        addMember(name, birthday, pass, mobile, fee);
+                    }
+
+                    if (instruction.equals("save")) {
+                        writeToMembersFile();
+                    }
+                }
+                else {
+                    lineArr = line.split(" ");
+                    instruction = lineArr[0];
+
+                    if (instruction.equals("query")) {
+                        key = lineArr[1];
+                        value= lineArr[2];
+                    }
+
+                    if (key.equals("pass") && value.equals("Silver")) {
+                        Double totalFee = getTotalMemberShipFees(key, value);
+                        writeQuery1ToReportFile(key, value, totalFee);
+                    }
                 }
 
-                if (instruction.equals("save")) {
-                    writeToMembersFile();
-                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("File Not Found" + e);
         } catch (IOException e) {
             System.out.println("Exception while reading file" + e);
         }
+    }
+
+    public void writeQuery1ToReportFile(String key, String value, Double queryOutput) {
+        String queryHeader = "--query " + key + " " + value + "--";
+        String queryContent = "Total membership fees = $" + queryOutput;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(queryHeader).append("\n").append(queryContent).append("\n");
+
+        File file = new File("./resources/reportFile.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.append(sb);
+        } catch (IOException e) {
+            System.out.println("Exception while writing to a file" + e);
+        }
+    }
+
+    public double getTotalMemberShipFees(String key, String value) {
+        ArrayList<Member> memberList = CacheManager.getInstance().getMemberList();
+        List<Member> filteredMember = memberList.stream()
+                .filter(m -> m.getPass().equals(value))
+                .collect(Collectors.toList());
+
+        double sum = 0.0;
+        for (Member member: filteredMember) {
+            sum = sum + Double.parseDouble(member.getFee().substring(1));
+        }
+
+        return sum;
     }
 
     public void addMember(String name, String birthday, String pass, int mobile, String fee) {
