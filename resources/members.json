@@ -2,14 +2,14 @@
   "members": [
     {
       "name": "James Bloggs",
-      "birthday": "20/12/1978",
+      "birthday": "1978-12-10",
       "pass": "Gold",
       "mobile": "1234567890",
       "fee": "$60"
     },
     {
       "name": "Banin Shrestha",
-      "birthday": "17/05/1995",
+      "birthday": "1995-05-17",
       "pass": "Silver",
       "mobile": "9841201124",
       "fee": "$50"

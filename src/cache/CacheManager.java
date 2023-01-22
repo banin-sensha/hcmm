@@ -8,6 +8,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CacheManager {
     private static CacheManager cacheManager;
@@ -19,7 +21,7 @@ public class CacheManager {
         return cacheManager;
     }
 
-    private ArrayList<Member> memberList = new ArrayList<>();
+    private List<Member> memberList = Collections.EMPTY_LIST;
 
     public void setMemberList(ArrayList<Member> memberList) {
         this.memberList = memberList;
@@ -30,6 +32,9 @@ public class CacheManager {
         Type memberType = new TypeToken<ArrayList<Member>>() {}.getType();
 
         memberList= new Gson().fromJson(jsonObject.get("members"), memberType);
+        for (Member member: memberList) {
+            member.calculateAge();
+        }
     }
     public JsonObject readMembersFile() {
         File file = new File("./resources/members.json");
@@ -46,6 +51,6 @@ public class CacheManager {
     }
 
     public ArrayList<Member> getMemberList() {
-        return memberList;
+        return (ArrayList<Member>) memberList;
     }
 }

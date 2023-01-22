@@ -6,9 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Array;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MemberService {
@@ -68,6 +67,10 @@ public class MemberService {
                         Double totalFee = getTotalMemberShipFees(key, value);
                         writeQuery1ToReportFile(key, value, totalFee);
                     }
+
+                    if (key.equals("age") && value.equals("fee")) {
+                        writeQuery2ToReportFile(key, value);
+                    }
                 }
 
             }
@@ -102,7 +105,42 @@ public class MemberService {
         sb.append(queryHeader).append("\n").append(queryContent).append("\n");
 
         File file = new File("./resources/reportFile.txt");
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+            writer.append(sb);
+        } catch (IOException e) {
+            System.out.println("Exception while writing to a file" + e);
+        }
+    }
+
+    public void writeQuery2ToReportFile(String key, String value) {
+        ArrayList<Member> memberList = CacheManager.getInstance().getMemberList();
+        double[] totalFees = new double[5];
+
+
+        for (Member member: memberList) {
+            if (member.getAge() > 0 && member.getAge() <= 8) {
+                totalFees[0] = totalFees[0] + Double.parseDouble(member.getFee().substring(1));
+            }
+            if (member.getAge() > 8 && member.getAge() <=18) {
+                totalFees[1] = totalFees[1] + Double.parseDouble(member.getFee().substring(1));
+            }
+            if (member.getAge() > 18 && member.getAge() <= 65) {
+                totalFees[2] = totalFees[2] + Double.parseDouble(member.getFee().substring(1));
+            }
+            if (member.getAge() > 65) {
+                totalFees[3] = totalFees[3] + Double.parseDouble(member.getFee().substring(1));
+            }
+        }
+
+        String queryHeader = "--query " + key + " " + value + "--";
+        StringBuilder sb = new StringBuilder();
+        sb.append(queryHeader).append("\n").append("Total Club Member size: 50").append("\n").append("Age based fee income distribution").append("\n")
+                .append("(0,8]:").append(totalFees[0]).append("\n").append("(8,18]:").append(totalFees[1]).append("\n")
+                .append("(18,65]:").append(totalFees[2]).append("\n").append("(65,-]:").append(totalFees[3]).append("\n")
+                .append("Unknown:").append("$0.00");
+
+        File file = new File("./resources/reportFile.txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.append(sb);
         } catch (IOException e) {
             System.out.println("Exception while writing to a file" + e);
@@ -165,7 +203,7 @@ public class MemberService {
     }
 
     public void writeToMembersFile() {
-        ArrayList<Member> memberList = CacheManager.getInstance().getMemberList();
+        List<Member> memberList = CacheManager.getInstance().getMemberList();
         try {
             new ObjectMapper().writeValue(new File("./resources/output.json"), memberList);
         } catch (IOException e) {
